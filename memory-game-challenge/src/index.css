@@ -1,0 +1,118 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+:root
+{
+  --hologramColor:rgb(0, 174, 255,0.7);
+  --hologramColorLight:rgba(29, 203, 255, 0.7);
+  --hologramColorText:rgb(147, 230, 255);
+
+}
+
+
+html
+{
+  background: url("/sky.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: "Orbitron", sans-serif;
+}
+.box-container
+{
+  max-width: 1500px;
+  margin: 0 auto;
+}
+.flex-wrap
+{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.memory-game
+{
+  background-color: rgba(0,0,0,0.5);
+  min-width: 100%;
+  min-height: 100vh;
+}
+section
+{
+  width: 100dvw;
+  height: 100dvh;
+}
+.hologram-box
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 80%;
+  margin: 0 auto;
+  background: var(--hologramColor);
+  border-radius: 20px;
+  box-shadow: 0 0 10px 10px var(--hologramColorLight);
+}
+.logo
+{
+  max-width: 500px;
+  margin: 0 auto;
+}
+.logo img
+{
+  width: 100%;
+  filter: contrast(0.5) brightness(4);
+  mix-blend-mode: color-dodge;
+}
+.btn 
+{
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn:hover
+{
+  scale:1.1;
+}
+.start-btn
+{
+  color:var(--hologramColorText) ;
+  text-shadow: 0 0 10px var(--hologramColor);
+  transition: all 0.3s ease;
+}
+.start-btn:hover
+{
+  color: #fff;
+}
+
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+
+
+
+@keyframes slideUp {
+    0% { transform: translateY(-100%); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+@keyframes slideDown {
+    0% { transform: translateY(100%); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  .animate-slide-up {
+    animation: slideUp 1s ease forwards;
+  }
+   .animate-slide-down {
+    animation: slideDown 0.5s ease forwards;
+  }
