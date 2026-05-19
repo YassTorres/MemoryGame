@@ -88,10 +88,23 @@ section
 {
   color: #fff;
 }
+.title
+{
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: bold;
+    margin: 20px 0;
+    text-align: center;
+}
 .gamescreen .hologram-box
 {
   background: var(--hologramBlueColor);
   box-shadow: 0 0 10px 10px var(--hologramBlueColor);
+  border:solid 4px var(--purpleColor);
+  min-height: 100%;
+  position: relative;
+  top: -50px;
 }
 .card
 {
@@ -149,17 +162,46 @@ section
   opacity: 0;
 }
 
-.perspective-1000 {
-  perspective: 1000px;
+.modal-container
+{
+    position: relative;
+    width: 85%;
+    max-width: 1200px;
+    background: var(--hologramColor);
+    border-radius: 15px;
+    padding: 50px;
 }
-.transform-style-3d {
-  transform-style: preserve-3d;
+.modal-container .close
+{
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    font-weight: bold;
 }
-.backface-hidden {
-  backface-visibility: hidden;
+.modal-container .reverse-card
+{
+  display: none;
 }
-.rotate-y-180 {
-  transform: rotateY(180deg);
+.modal-container .card
+{
+  max-width: 400px;
+}
+.modal-container .card-image
+{
+   margin: 50px 0;
+}
+.modal-container .card-content
+{
+  transform: inherit;
+}
+.header
+{
+  width: 100%;
+  height: 100px;
+  background-color: var(--purpleColor); 
+  clip-path: polygon(0% 0%, 100% 0%, 100% 60%, 60% 60%, 58% 100%, 42% 100%, 40% 60%, 0% 60%);
+  z-index: 99;
+  text-align: center;
 }
 
 
@@ -173,9 +215,17 @@ section
     0% { transform: translateY(100%); opacity: 0; }
     100% { transform: translateY(0); opacity: 1; }
   }
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
   .animate-slide-up {
     animation: slideUp 1s ease forwards;
   }
    .animate-slide-down {
     animation: slideDown 0.5s ease forwards;
+  }
+  .animate-fade-in
+  {
+     animation: fadeIn 0.6s ease forwards;
   }

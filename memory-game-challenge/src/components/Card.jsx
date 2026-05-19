@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react"
 
-function Card({id,cardId,name,image,isFlipped,onClickCard})
+function Card({id,cardId,name,image,isFlipped = null,onClickCard = null})
 {
     const [isFlip, setFlip] = useState(isFlipped);
     //VOLTEAR CARTAS
