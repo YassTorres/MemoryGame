@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import cardsData from "../data/cards.json";
 import Card from "../components/Card";
 import Modal from "../components/Modal";
+import Header from "../components/Header";
+import { useNavigate } from "react-router-dom";
 
 
 function GameScreen()
@@ -12,6 +14,7 @@ function GameScreen()
     const [isModal,setModal] = useState(false);
     const [modalContent, setModalContent] = useState(null);
     const [timer,setTimer] = useState(30);
+    const navigate = useNavigate();
 
     useEffect(()=>{
        const shuffleCards = shuffle(cardsData.cards);
@@ -32,8 +35,9 @@ function GameScreen()
   }, [timer]);
     return(
      <>
+    <div className="window"> </div>
     <section className="gamescreen flex-wrap"> 
-        <div className="header"> <p className="text-8xl text-white"> {timer}</p> </div>
+        <Header timer={timer}/>
         {isModal && 
         <Modal closeModal={()=>{setModal(false)}}>
             {modalContent}
@@ -103,16 +107,18 @@ function GameScreen()
     }
     function endGame(state)
     {
+        let message;
         switch (state) {
             case "WIN":
-                console.log("GANASTE")
+            message = "you did it";
                 break;
             case "LOSE":
-                console.log("PERDISTE")
+            message = "oops you didn't find them all"
                 break;
             default:
                 break;
         }
+         navigate('/gameover',{state:message})
     }
      function fillModalContent(selectedCards, isMatch)
     {

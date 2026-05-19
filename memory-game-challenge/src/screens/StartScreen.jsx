@@ -6,6 +6,7 @@ function StartScreen()
 {
     return(
     <>
+    <div className="window"> </div>
      <section className="startscreen box-container flex-wrap"> 
         <div className="hologram-box"> 
             <picture className="logo animate-slide-up"> 

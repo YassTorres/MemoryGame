@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
 :root
 {
-  --hologramColor:rgb(0, 174, 255,0.7);
-  --hologramColorLight:rgba(29, 203, 255, 0.7);
+  --hologramColor:rgb(0, 174, 255,0.4);
+  --hologramColorLight:rgba(0, 243, 255, 0.7);
   --hologramColorText:rgb(147, 230, 255);
   --hologramBlueColor:rgba(49, 3, 255, 0.7);
   --purpleColor:rgba(255, 0, 255, 1);
@@ -18,6 +18,35 @@ html
   background-size: cover;
   background-attachment: fixed;
   font-family: "Orbitron", sans-serif;
+}
+.window
+{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 200vh;
+    background-color: rgb(0 16 61 / 50%);
+    opacity: 0.88;
+    z-index: -1;
+}
+.window::before,.window::after
+{
+    content: "";
+    width: 140px;
+    height: 150%;
+    background: #fff;
+    display: block;
+    transform: rotate(-30deg);
+    left: 100%;
+    top: -15%;
+    position: absolute;
+    opacity: 0.2;
+    z-index: -1;
+
+}
+.window::after
+{
+    left: 25%;
 }
 .box-container
 {
@@ -42,6 +71,8 @@ section
 {
   width: 100dvw;
   height: 100dvh;
+  z-index: 1;
+  position: relative;
 }
 .hologram-box
 {
@@ -52,9 +83,10 @@ section
   width: 80%;
   min-height: 80%;
   margin: 0 auto;
-  background: var(--hologramColor);
+  background: var(--hologramBlueColor);
+  border: solid 2px #fff;
   border-radius: 20px;
-  box-shadow: 0 0 10px 10px var(--hologramColorLight);
+  box-shadow: 0 0 30px 20px var(--hologramBlueColor);
 }
 .logo
 {
@@ -97,9 +129,18 @@ section
     margin: 20px 0;
     text-align: center;
 }
+
+.header .sound
+{
+    position: absolute;
+    right: 50px;
+    top: 0;
+    max-width: 50px;
+    filter: contrast(0) brightness(3);
+    transition: all 0.5s ease;
+}
 .gamescreen .hologram-box
 {
-  background: var(--hologramBlueColor);
   box-shadow: 0 0 10px 10px var(--hologramBlueColor);
   border:solid 4px var(--purpleColor);
   min-height: 100%;
