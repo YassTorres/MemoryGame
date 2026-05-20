@@ -60,7 +60,7 @@ function GameScreen()
         </Modal>}
         <div className="hologram-box"> 
             <h2 className="title mt-20! text-amber-300!"> Choose your Pair Cards </h2>
-            <div className="card-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-3 place-items-center px-20 lg:px-40 py-5"> 
+            <div className={`card-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-3 place-items-center px-20 lg:px-40 py-5 ${revealCards.length >= 2 ? "pointer-events-none" : ""}`}> 
                 {cards.map((card)=>{
                     const flippedCards = revealCards.includes(card) || matchCards.includes(card);
                     return(

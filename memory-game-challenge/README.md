@@ -1,16 +1,53 @@
-# React + Vite
+# Memory Game Challenge By Yassiel Torres
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fast-paced, highly responsive memory game built on React JS. This project implements custom state machine patterns for card matching, precise native audio synchronization, memory leak protection, and a fluid responsive layout.
 
-Currently, two official plugins are available:
+##  Live Demo & Repository
+- **Live Deployment URL:** [[Pega aquí tu link de Vercel o Netlify, ej: https://yassiel-memory-game.vercel.app]]
+- **Repository:** [[https://github.com/YassTorres/MemoryGame]]
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+##  Architecture
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 1. React & Vite
+Chosen for the high UI interaction, the game constantly changes states and variables, so React allows me to instantly manipulate the DOM.
+### 2. Tailored Hybrid Styling (Tailwind CSS + Vanilla CSS)
+To avoid utility-class saturation in the JSX tree and maximize flexibility, i choosed a balanced hybrid styling architecture:
+- **Tailwind CSS** handles the global structural, grid definitions,spacing, margins and layout responsiveness.
+- **Vanilla CSS** handles component-level positioning, design, precise element centering, and advanced transitions and animations.
 
-## Expanding the ESLint configuration
+### 3. Memory Management
+Instead of relying on heavy external audio libraries, the game hooks directly into the native HTML5 `Audio` API. 
+- **AUDIO** Audio instances are instantiated cleanly outside the component re-render scopes or wrapped in lifecycles.
+- **CLEAN UP:** Continuous intervals (like the ticking clock sound) and background themes are explicitly bound to `useEffect` teardown return functions (`clearInterval` and `.pause()`). This ensures that if a user navigates away or unmounts a screen, background tasks are killed instantly, preventing memory leaks and sound overlapping.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 4. Immutable Data Shuffling
+The game utilizes a classic Fisher-Yates shuffle algorithm. To prevent direct reference mutation of the original source data (`cards.json`).
+
+---
+
+## Project Structure
+
+src/
+├── assets/          # SVG Vector Graphics and MP3 SFX audio assets
+├── components/      # Pure/Controlled UI components (Card, Button, Header, Modal)
+├── data/            # Static JSON specifications (All the cards data like, id, name and image.)
+├── screens/         # Structural Views / Page layout handlers
+│   ├── StartScreen.jsx
+│   ├── GameScreen.jsx
+│   └── GameOverScreen.jsx
+├── index.css        # Vanilla CSS overrides and advanced animations.
+├── main.jsx         # Application bootstrapping
+└── App.jsx          # Route declarations and core engine wrapper
+
+## Installation & Local Setup
+
+Follow these steps to clone the repository:
+1. **Clone the repository:**
+git clone https://github.com/YassTorres/MemoryGame.git
+cd MemoryGame
+2. **Install node dependencies:**
+npm install
+3. **Start the local development server:**
+npm run dev
