@@ -1,9 +1,10 @@
 import Button from "../components/Button"
 import logo from "../assets/images/logo.svg"
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 function StartScreen()
 {
+    const navigate = useNavigate();
     return(
     <>
     <div className="window"> </div>
@@ -13,9 +14,9 @@ function StartScreen()
                 <img className="my-10" src={logo} alt="memory-game-logo"/> 
             </picture>
             
-            <Link to="/game" className="animate-slide-down">
-             <Button Style="animate-bounce [animation-delay:100ms] start-btn text-6xl" Text="START GAME" OnClick={() => console.log("START")}/>
-            </Link>
+            <div className="animate-slide-down">
+                <Button Style="animate-bounce [animation-delay:100ms] start-btn text-6xl" Text="START GAME" OnClick={() => navigate("/game")}/>
+            </div>
 
         </div>
 

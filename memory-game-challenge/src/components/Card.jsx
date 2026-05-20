@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react"
 
-function Card({id,cardId,name,image,isFlipped = null,onClickCard = null})
+function Card({id,cardId,name,image,isFlipped,onClickCard = null, customClass = ""})
 {
     const [isFlip, setFlip] = useState(isFlipped);
     //VOLTEAR CARTAS
@@ -15,7 +15,7 @@ function Card({id,cardId,name,image,isFlipped = null,onClickCard = null})
        onClickCard();
     }
     return(
-        <div className={`card ${isFlip && " flipped"}`} onClick={()=>{handleClick()}}> 
+        <div className={`card ${isFlip && " flipped"} ${customClass}`} onClick={()=>{handleClick()}}> 
             <div className="reverse-card"> 
                 <span className="text-8xl text-amber-300"> ? </span>
             </div>

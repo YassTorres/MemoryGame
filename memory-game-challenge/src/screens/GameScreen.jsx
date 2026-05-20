@@ -4,8 +4,14 @@ import Card from "../components/Card";
 import Modal from "../components/Modal";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
+import matchSFX from "../assets/sounds/correct.mp3";
+import errorSFX from "../assets/sounds/incorrect.mp3";
+import timerSFX from "../assets/sounds/ticking.mp3";
+import backgroundSfx from "../assets/sounds/background.mp3"
 
-
+const matchSound = new Audio(matchSFX);
+const errorSound = new Audio(errorSFX);
+const timerSound = new Audio(timerSFX);
 function GameScreen()
 {
     const [cards,setCards] = useState([]);
@@ -15,6 +21,7 @@ function GameScreen()
     const [modalContent, setModalContent] = useState(null);
     const [timer,setTimer] = useState(30);
     const navigate = useNavigate();
+    //AUDIOS
 
     useEffect(()=>{
        const shuffleCards = shuffle(cardsData.cards);
@@ -23,16 +30,25 @@ function GameScreen()
     },[])
 
     useEffect(() => {
-    if (timer <= 0) 
-    {
-        endGame("LOSE");
-        return
-    };
-    let interval = setInterval(() => {
-        setTimer((timer) => timer - 1);
+    const interval = setInterval(() => {
+        setTimer((time) => {
+            if (time <= 0) 
+            {
+                clearInterval(interval);
+                endGame("LOSE");
+                return
+            };
+            const currentTime = time - 1
+            if (currentTime <= 10) 
+            {
+                timerSound.currentTime = 0;
+                timerSound.play();
+            }
+            return currentTime;
+        });
       }, 1000);
     return () => clearInterval(interval);
-  }, [timer]);
+  }, []);
     return(
      <>
     <div className="window"> </div>
@@ -43,8 +59,8 @@ function GameScreen()
             {modalContent}
         </Modal>}
         <div className="hologram-box"> 
-            <h2 className="title mt-20!"> Choose your Pair Cards </h2>
-            <div className="card-container grid grid-cols-3 w-full gap-3 place-items-center px-40 py-5"> 
+            <h2 className="title mt-20! text-amber-300!"> Choose your Pair Cards </h2>
+            <div className="card-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-3 place-items-center px-20 lg:px-40 py-5"> 
                 {cards.map((card)=>{
                     const flippedCards = revealCards.includes(card) || matchCards.includes(card);
                     return(
@@ -80,11 +96,15 @@ function GameScreen()
                 const updatedMatchCards = [...matchCards,...selectedCards]
                 setMatchCards(prev => [...prev, ...selectedCards]);
                 checkCards(updatedMatchCards);
+                matchSound.currentTime = 0;
+                matchSound.play();
                 delayTime = 800;
             }
             else
             {
                 isMatch = false;
+                errorSound.currentTime = 0;
+                errorSound.play();
                 delayTime = 500;
                 //console.log("NO ES MATCH");
             }
@@ -107,6 +127,8 @@ function GameScreen()
     }
     function endGame(state)
     {
+        timerSound.pause();
+        timerSound.currentTime = 0;
         let message;
         switch (state) {
             case "WIN":
@@ -124,7 +146,7 @@ function GameScreen()
     {
         const cards = selectedCards;
         const htmlContent = 
-        <div className="grid grid-cols-2 w-full gap-3 place-items-center p-20">
+        <div className="grid-modal grid grid-cols-2 w-full gap-3 place-items-center md:p-20">
             {cards.map((card)=>(
                <Card
                     key={card.id}
@@ -132,6 +154,7 @@ function GameScreen()
                     cardId = {card.cardID}
                     name = {card.name}
                     image = {card.image}
+                    customClass="animate-fade-in"
                 />
             ))}
         </div>
@@ -140,7 +163,8 @@ function GameScreen()
         {
             return  (
             <> 
-            <h3 className="title"> Nice! it's a match</h3>
+            <h3 className="title text-amber-300!"> Nice! it's a match</h3>
+            <img className="confetti" src="/confetti.gif" alt="congratulations"/>
             {htmlContent}
             </>
             )
@@ -149,7 +173,7 @@ function GameScreen()
         {
           return  (
             <> 
-            <h3 className="title"> Sorry, but this is not a match</h3>
+            <h3 className="title text-amber-300!"> Sorry, but this is not a match</h3>
             {htmlContent}
             </>
             )
@@ -160,12 +184,13 @@ function GameScreen()
 //REVOLVER CARTAS
     function shuffle(data)
     {
-         for (let i = data.length - 1; i > 0; i--)
+        const cardsData =[...data]
+         for (let i = cardsData.length - 1; i > 0; i--)
         {
             const j = Math.floor(Math.random() * (i + 1));
-            [data[i], data[j]] = [data[j], data[i]];
+            [cardsData[i], cardsData[j]] = [cardsData[j], cardsData[i]];
         }
-        return data;
+        return cardsData;
     }
    
 export default GameScreen
