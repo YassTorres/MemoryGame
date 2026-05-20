@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+@config "../tailwind.config.js";
 :root
 {
   --hologramColor:rgb(0, 174, 255,0.4);
@@ -212,6 +213,7 @@ section
     border: solid 3px var(--purpleColor);
     border-radius: 15px;
     padding: 50px;
+    max-height: 90dvh;
 }
 .modal-container .close
 {
@@ -239,6 +241,8 @@ section
 }
 .header
 {
+  position: fixed;
+  top: 0;
   width: 100%;
   height: 100px;
   background-color: var(--purpleColor); 
@@ -248,6 +252,11 @@ section
    display: flex;
      justify-content: center;
      align-items: center;
+}
+.gamescreen
+{
+  top: 100px;
+  position: relative;
 }
 .confetti
 {
@@ -263,8 +272,6 @@ section
 { 
   .header
   {
-     position: fixed;
-     top: 0;
      clip-path:none;
      height: 70px;
   }
@@ -305,9 +312,39 @@ section
     padding: 100px 50px;
   }
   
+}
+@media (max-height: 700px) 
+{ 
+   .header
+  {
+     clip-path:none;
+     height: 70px;
+  }
+  .modal-container
+  {
+    max-height: 85dvh;
+    min-height: 85dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .grid-modal
+  {
+    display: none;
+  }
+}
+@media (max-height: 450px) 
+{ 
+  .logo {
+      max-width: 250px;
+  }
+  .start-btn
+  {
+    font-size: 2.5rem;
+    margin: 15px;
+  }
   
 }
-
 @keyframes slideUp {
     0% { transform: translateY(-100%); opacity: 0; }
     100% { transform: translateY(0); opacity: 1; }
