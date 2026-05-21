@@ -118,6 +118,7 @@ function GameScreen()
         }
         
     }
+    //CHECK IF YOU CAN WIN
     function checkCards(updatedMatchCards){
         if(updatedMatchCards.length == cards.length)
         {
@@ -142,6 +143,7 @@ function GameScreen()
         }
          navigate('/gameover',{state:message})
     }
+    //GET HTML BY MODAL
      function fillModalContent(selectedCards, isMatch)
     {
         const cards = selectedCards;
