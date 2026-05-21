@@ -27,20 +27,6 @@ The game utilizes a classic Fisher-Yates shuffle algorithm. To prevent direct re
 
 ---
 
-## Project Structure
-
-src/
-├── assets/          # SVG Vector Graphics and MP3 SFX audio assets
-├── components/      # Pure/Controlled UI components (Card, Button, Header, Modal)
-├── data/            # Static JSON specifications (All the cards data like, id, name and image.)
-├── screens/         # Structural Views / Page layout handlers
-│   ├── StartScreen.jsx
-│   ├── GameScreen.jsx
-│   └── GameOverScreen.jsx
-├── index.css        # Vanilla CSS overrides and advanced animations.
-├── main.jsx         # Application bootstrapping
-└── App.jsx          # Route declarations and core engine wrapper
-
 ## Installation & Local Setup
 
 Follow these steps to clone the repository:
