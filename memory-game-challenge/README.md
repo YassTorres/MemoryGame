@@ -3,7 +3,7 @@
 A fast-paced, highly responsive memory game built on React JS. This project implements custom state machine patterns for card matching, precise native audio synchronization, memory leak protection, and a fluid responsive layout.
 
 ##  Live Demo & Repository
-- **Live Deployment URL:** [[Pega aquí tu link de Vercel o Netlify, ej: https://yassiel-memory-game.vercel.app]]
+- **Live Deployment URL:** [[https://memory-game-challenge-yassieltorres.vercel.app]]
 - **Repository:** [[https://github.com/YassTorres/MemoryGame]]
 
 ---
